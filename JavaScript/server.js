@@ -6,7 +6,7 @@ const http = require('http');
 const cache = new Map();
 const lib = './lib/';
 
-const cacheFile = (path) => {
+const cacheFile = path => {
   const filePath = lib + path;
   try {
     const libPath = require.resolve(filePath);
@@ -22,14 +22,14 @@ const cacheFile = (path) => {
   }
 };
 
-const cacheFolder = (path) => {
+const cacheFolder = path => {
   fs.readdir(path, (err, files) => {
     if (err) return;
     files.forEach(cacheFile);
   });
 };
 
-const watch = (path) => {
+const watch = path => {
   fs.watch(path, (event, file) => {
     cacheFile(file);
   });
